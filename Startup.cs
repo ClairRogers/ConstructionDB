@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using construction.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,12 @@ namespace construction
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+      //ALSO ADD IN THIS FOR DB:
       services.AddTransient<IDbConnection>(x => CreateDBContext());
+
+      //REGISTER ALL REPOS
+      services.AddTransient<ContractorsRepository>();
+      services.AddTransient<JobsRepository>();
 
     }
 
